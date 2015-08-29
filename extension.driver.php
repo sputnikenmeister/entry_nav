@@ -45,9 +45,9 @@
 				$actions = $cxt->getChildByName( 'ul', 0 );
 				// append list of actions if missing
 				if( !$actions instanceof XMLElement ){
-				     $ul = new XMLelement('ul', null, array('class' => 'actions'));
-				     $cxt->appendChild( $ul );
-				     $actions = $cxt->getChildByName( 'ul', 0 );
+					$ul = new XMLelement('ul', null, array('class' => 'actions'));
+					$cxt->appendChild( $ul );
+					$actions = $cxt->getChildByName( 'ul', 0 );
 				}
 
 				// fetch entries
