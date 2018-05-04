@@ -1,5 +1,5 @@
 /*global module*/
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 	"use strict";
 
 	grunt.config("pkg", grunt.file.readJSON("package.json"));
@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 		imagesDir: "assets",
 		fontsDir: "assets",
 		javascriptsDir: "assets",
-		httpPath: "/extensions/folio_overrides",
+		httpPath: "/extensions/entry_nav",
 	});
 	grunt.config("compass.build.options", { sourcemap: true });
 	grunt.config("compass.dist.options", { sourcemap: false, force: true });
@@ -27,8 +27,8 @@ module.exports = function (grunt) {
 	grunt.config("autoprefixer.build", {
 		options: { map: true },
 		files: {
-			"assets/folio_overrides.css": "assets/folio_overrides.css",
-			"assets/folio_overrides.fields.css": "assets/folio_overrides.fields.css"
+			"assets/entry_nav.css": "assets/entry_nav.css",
+			"assets/entry_nav.fields.css": "assets/entry_nav.fields.css"
 		}
 	});
 	grunt.config("autoprefixer.dist", {
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.config("jshint", {
 		options: { jshintrc: "./.jshintrc" },
-		files: [ "assets/src/js/**/*.js" ]
+		files: ["assets/src/js/**/*.js"]
 	});
 
 	/*
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
 			sourceMapIncludeSources: true
 		},
 		files: {
-			"assets/folio_overrides.fields.js": ["assets/src/js/**/*.js"]
+			"assets/entry_nav.publish_single.js": ["assets/src/js/**/*.js"]
 		}
 	});
 	grunt.config("uglify.dist", {
@@ -80,21 +80,22 @@ module.exports = function (grunt) {
 		"reload-config": {
 			files: ["gruntfile.js"],
 		},
-		"process-sources": {
-			files: ["assets/src/js/**/*.js"],
-			tasks: ["uglify:build"]
-		},
+		// "process-sources": {
+		// 	files: ["assets/src/js/**/*.js"],
+		// 	tasks: ["uglify:build"]
+		// },
 		styles: {
 			files: ["assets/src/sass/**/*.scss"],
 			tasks: ["compass:build", "autoprefixer:build"]
 		},
 	});
 
-
-	grunt.registerTask("dist", 			["compass:dist", "autoprefixer:dist", "jshint", "uglify:dist"]);
-	grunt.registerTask("buildWatch", 	["watch"]);
-	grunt.registerTask("buildScripts", 	["uglify:build"]);
-	grunt.registerTask("buildStyles", 	["compass:build", "autoprefixer:build"]);
-	grunt.registerTask("build", 		["buildStyles", "buildScripts"]);
-	grunt.registerTask("default", 		["build"]);
+	// grunt.registerTask("distScripts", ["jshint", "uglify:dist"]);
+	// grunt.registerTask("buildScripts", ["uglify:build"]);
+	grunt.registerTask("distStyles", ["compass:dist", "autoprefixer:dist"]);
+	grunt.registerTask("buildStyles", ["compass:build", "autoprefixer:build"]);
+	grunt.registerTask("dist", ["distStyles" /*, "distScripts"*/ ]);
+	grunt.registerTask("buildWatch", ["watch"]);
+	grunt.registerTask("build", ["buildStyles" /*, "buildScripts"*/ ]);
+	grunt.registerTask("default", ["build"]);
 };
