@@ -27,8 +27,8 @@ module.exports = function(grunt) {
 	grunt.config("autoprefixer.build", {
 		options: { map: true },
 		files: {
-			"assets/entry_nav.css": "assets/entry_nav.css",
-			"assets/entry_nav.fields.css": "assets/entry_nav.fields.css"
+			// "assets/entry_nav.css": "assets/entry_nav.css",
+			"assets/entry_nav.publish_single.css": "assets/entry_nav.publish_single.css"
 		}
 	});
 	grunt.config("autoprefixer.dist", {
